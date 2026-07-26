@@ -348,15 +348,15 @@ export default function App() {
             <ul className="space-y-4 text-lg md:text-xl mb-4">
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#F4E285] border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '0ms' }}>1</span>
-                <span>30 ideias de desenhos para você não perder tempo tentando decidir por onde começar.</span>
+                <span>Um painel com 30 espaços numerados para registrar um desenho por dia.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#F0B7B7] border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '200ms' }}>2</span>
-                <span>Um quadro de acompanhamento para marcar cada dia concluído e visualizar seu progresso.</span>
+                <span>Uma lista com 30 sugestões criativas para usar sempre que você não souber o que desenhar.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#436CC0] text-white border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '400ms' }}>3</span>
-                <span>Uma proposta leve e prática para encaixar o desenho na rotina durante 30 dias.</span>
+                <span>Um material prático e visual para desacelerar e exercitar a criatividade por alguns minutos todos os dias.</span>
               </li>
             </ul>
           </div>
