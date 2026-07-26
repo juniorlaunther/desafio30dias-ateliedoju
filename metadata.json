@@ -1,0 +1,8 @@
+{
+  "name": "Desafio 30 Dias Desenhando",
+  "description": "Landing page de vendas estilo sketch para o produto Desafio 30 Dias Desenhando.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
