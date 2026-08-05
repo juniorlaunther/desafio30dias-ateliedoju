@@ -11,7 +11,7 @@ const faqData = [
   {
     icon: "📖",
     question: "O que vou encontrar dentro do Desafio?",
-    answer: "Você encontrará 30 ideias criativas de desenho, uma para cada dia, além de um espaço para acompanhar o seu progresso. O material também inclui um quadro para combinar personagem, objeto e lugar, criando novas possibilidades de desenho. Você pode escolher as combinações por conta própria ou deixar o destino decidir usando as tirinhas recortáveis."
+    answer: "Você encontrará 30 ideias criativas de desenho, uma para cada dia, além de duas páginas, com 30 espaços totais, para os desenhos diários. O material também inclui um quadro para combinar personagem, objeto e lugar, criando novas possibilidades de desenho. Você pode escolher as combinações por conta própria ou deixar o destino decidir usando as tirinhas recortáveis."
   },
   {
     icon: "📅",
