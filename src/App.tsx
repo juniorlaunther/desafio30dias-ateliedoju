@@ -1,14 +1,98 @@
-import { ShoppingCart, Star, Play, ShieldCheck, ArrowRight, PenTool, X, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
+import { ShoppingCart, Star, Play, ShieldCheck, ArrowRight, PenTool, X, ChevronLeft, ChevronRight, MessageCircle, ChevronDown } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+
+const faqData = [
+  {
+    icon: "✏️",
+    question: "Para quem é indicado o Desafio 30 Dias Desenhando?",
+    answer: "O Desafio é indicado para pessoas de diferentes idades e níveis de experiência que desejam começar a desenhar, retomar a prática, exercitar a criatividade ou criar o hábito de desenhar com mais frequência."
+  },
+  {
+    icon: "🌟",
+    question: "Preciso saber desenhar para participar?",
+    answer: "Não! O Desafio foi criado para incentivar a prática de forma leve e sem cobranças. Você não precisa ter experiência, dominar técnicas ou fazer desenhos perfeitos. Basta começar e criar do seu jeito."
+  },
+  {
+    icon: "📖",
+    question: "O que vou encontrar dentro do Desafio?",
+    answer: "Você encontrará 30 ideias criativas de desenho, uma para cada dia, além de um espaço para acompanhar o seu progresso. O material também inclui um quadro para combinar personagem, objeto e lugar, criando novas possibilidades de desenho. Você pode escolher as combinações por conta própria ou deixar o destino decidir usando as tirinhas recortáveis."
+  },
+  {
+    icon: "📅",
+    question: "Preciso completar os 30 dias seguidos?",
+    answer: "Não. Você pode fazer um desenho por dia ou realizar o Desafio no seu próprio ritmo. Caso precise fazer uma pausa, basta continuar de onde parou. O mais importante é criar, praticar e aproveitar o processo."
+  },
+  {
+    icon: "🖨️",
+    question: "Posso imprimir o material?",
+    answer: "Sim! O material foi preparado em formato A4 para que você possa imprimir, acompanhar os dias concluídos, utilizar as tirinhas recortáveis e manter o Desafio sempre por perto durante a sua prática."
+  },
+  {
+    icon: "📱",
+    question: "Como funciona o acesso depois da compra?",
+    answer: "Após a aprovação do pagamento, o acesso é liberado automaticamente. Você receberá as instruções no e-mail informado durante a compra e poderá acessar o Desafio sempre que quiser pela sua área de acesso."
+  }
+];
+
+const checkoutBaseUrl = "https://pay.hotmart.com/I106894004O?off=ymm60njl&checkoutMode=10";
+
+const allowedParams = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "utm_id",
+  "sck"
+];
 
 export default function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState(0);
   const [purchaseNotification, setPurchaseNotification] = useState<string | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [checkoutUrl, setCheckoutUrl] = useState(checkoutBaseUrl);
   
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      let foundAny = false;
+      const currentUrlParams: Record<string, string> = {};
+      
+      allowedParams.forEach(param => {
+        const value = urlParams.get(param);
+        if (value) {
+          currentUrlParams[param] = value;
+          foundAny = true;
+        }
+      });
+
+      let activeParams = currentUrlParams;
+      if (foundAny) {
+        sessionStorage.setItem('desafio30_utm_params', JSON.stringify(currentUrlParams));
+      } else {
+        const stored = sessionStorage.getItem('desafio30_utm_params');
+        if (stored) {
+          activeParams = JSON.parse(stored);
+        }
+      }
+
+      const finalUrl = new URL(checkoutBaseUrl);
+      Object.keys(activeParams).forEach(key => {
+        if (activeParams[key]) {
+          finalUrl.searchParams.set(key, activeParams[key]);
+        }
+      });
+      
+      setCheckoutUrl(finalUrl.toString());
+    } catch (e) {
+      console.error("Error setting up checkout URL", e);
+    }
+  }, []);
 
   useEffect(() => {
     const names = [
@@ -77,10 +161,10 @@ export default function App() {
   };
 
   const productImages = [
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNUmpOBb0B29fWw4IU8SgZa4vLIItWwQH6R9E30CwZ-KoiktjXFcX79B4dwAFuIa6qiLbBHMGd4JVG1222AAkH0_FAyawVBEN1A605R4B6sANQCKPFVwQbFJNrgo6fla243mizytJYjH-qj5SlCaAiajVdVz3mK7hyZOCTXIh_z8SCRddV3HZ0oDg94Mw/w480-h640/desenhando.png",
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQF9XJ454wd0uourww-UuQA8qBjT3kwTWnKZ-Szy6-5uBvjNBmfxxrSreMNV4Z5JXYfE6MeGcGjrSPpF66QY3SzUjfvHv1xYCFjKBFTXw9ubraSJwmqDHbAGPTtgq1SF7Z9FKFYwPcd-IajEpNhLCXc3BGYQks0-Ht8wkBGcZJQASf7boXPROhNU2Tj38/w480-h640/desenhando2.png",
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyvPpYrC2WGFPG4Qi78ErtqfB-r57pH-mph_yvhTQSDEhKl8m6b-L-PRI9Gd5M2vzTdlj8Q8QQVCuJk0nW23B1NY_y6U9wU6QYWm-wcw_RPIvN5kU1rqYGpnBV-MzAV3LICMuV4tXrA79g1QucyzG5TAT4QcZd27Hwe-7rIA28Tl4b_sxZq9sbFxoDZ-A/w480-h640/pagina%20close.png",
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhd0OcjWHbpcgEScV8vZ0dOfFQZklUuToa9RS2WqRsd8aFT3Ku4Kfz9Y5_XLL_XGz4AGA-Y0xbl4phh3qUemXUDJ4BeRiwEaFtSvA9DGfR3ng9HjhHxXz3idlATwcWbxR43giHi3XbBD4zyf_-ZEFiOd59AUsi7Ij_qYBZn8e8eUXdNB5-eklyHRL2csZk/w480-h640/desafio%2030%20dias%20tabela.png",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj7ApXwM9UeYxhvGO7VsWYWPvGlXsraQvCJzYFaLNwWlVoVu5eA6UAKuvSkqO3G7wlcaGnQfcraJq1dXwW0Ml55ctUqaLE9oazr859JoP081unreL7ukkUac629AacRpQUtMKhKmB4ORTK6E8a2sA7AGelgo4OrtmgGkyTEZrmsjClzoGKmfsVQYa5KL0/w480-h640/imagem%202.png",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1kewVte95VLwZpt2mctabiSvHEyyf7zWyOopa1_lpofHghVhepUfidU6xNQl-ubjHDOt3rU6XT6b3oHXtoCFgSOyLNf008HxnNcX3TFiv0EDRPFN_zpp65HPvoE0CgrSyi12UJgpdYUZIUhZTiaAn5rOKkW0HT9Scnbyt4xp05qnpqSTSCRDEvz9R8II/w480-h640/imagem%201.png",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPx4m9zxsHsVym0bCW1e4UCjSxzkh8cgeZ6dhQSNGJgoYNbHzjRY-1urmJUipQZOVG-ThlhayQql_WA3XwyPadOC2sC2cKFfM3hAF7T38aiBCzeHo8t8vPuXzPVYPAcYGtP8TTrFOIId_Djl9AuYuY_l5JvgwHh2cahqSqQrEoahe9kWUz31X5pjFKMvs/w480-h640/imagem%204.png",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZuDw7MRu_PUQoJFqqaYO3mrqadTgl5FRfomQpb7zuLa1RShzztm2eHVF3dAPDQwQTqLcBNB9F5ffajy6wB11xLN-yvGJuamk6YN6EBaMa3If_4xBp4a2yaXTs45AFNk0XOk8wLK-VC3z6f6h9yw-E67S9m4bRV1HTVDnwnmwHDfsBhXeHkpFihsDzqtU/w480-h640/imagem%203.png",
   ];
 
   const paginate = (newDirection: number) => {
@@ -232,7 +316,7 @@ export default function App() {
       {/* Header with Logo */}
       <header className="pt-6 pb-4 px-4 flex justify-center items-center">
         <img 
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhpE_EGskDV5xF-Zatju1s5YXCEwdvpoGvreUeDwvnsm4r6r3iCJLuvdEyMYGOmFw3lSUVTmCyF__bUxErisaS4CFA8c0v3aVpiiFIwd7H4-kZKyAFCXPl6LXKtle431_Dhcvmgb_YPD8OT_tXW2ya0MrYP8ZyV11lFaDWHAcuto0A6pyncxmhzsUsoZA/w640-h208/titulo%20desafio%2030%20dias%20desenhando.png" 
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAbEfYmvKtAJeq-HrRDkMtYH4bAdkiGlnIr_hj7LkP76lvJ3W8tbWj4jlwuFx0YAEgsjxpB80-33ki-NWKRiuh-byET4XMSQaRVJhZJZk8JLoHQuxpFURKCRzzb8px7v4qaBz2EJBmZHpiJ12Q6APTMsHW2dlKsWU2By-TbgikL6p0xezsVYM_cSt_c8Y/w400-h225/logo.png" 
           alt="Desafio 30 Dias Desenhando" 
           className="max-h-28 md:max-h-40 object-contain drop-shadow-md animate-scale-soft"
         />
@@ -299,7 +383,7 @@ export default function App() {
                <span className="text-[30px] font-bold text-[#436CC0] drop-shadow-sm">Por R$ 17,90</span>
             </div>
             
-            <a href="https://pay.hotmart.com/I106894004O?off=ymm60njl&checkoutMode=10" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto bg-[#436CC0] hover:bg-[#325296] text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2 md:gap-3 animate-shine">
+            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto bg-[#436CC0] hover:bg-[#325296] text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2 md:gap-3 animate-shine">
               <ShoppingCart className="w-6 h-6 shrink-0 animate-wiggle" />
               <span className="text-center leading-tight whitespace-nowrap">QUERO COMEÇAR O DESAFIO</span>
             </a>
@@ -316,23 +400,23 @@ export default function App() {
             <ul className="space-y-4 text-lg md:text-xl">
               <li className="flex items-start gap-3">
                 <ArrowRight className="w-6 h-6 text-[#436CC0] shrink-0 mt-1 animate-slide-x" style={{ animationDelay: '0ms' }} />
-                <span>Para quem sempre começa a desenhar, mas abandona a prática depois de alguns dias.</span>
+                <span>Para quem gosta de desenhar, mas tem dificuldade de manter uma rotina.</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="w-6 h-6 text-[#436CC0] shrink-0 mt-1 animate-slide-x" style={{ animationDelay: '100ms' }} />
-                <span>Para quem quer criar constância sem depender da inspiração aparecer.</span>
+                <span>Para quem nunca sabe o que desenhar e precisa de ideias para começar.</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="w-6 h-6 text-[#436CC0] shrink-0 mt-1 animate-slide-x" style={{ animationDelay: '200ms' }} />
-                <span>Para quem tem pouco tempo e procura uma atividade criativa para incluir na rotina.</span>
+                <span>Para quem quer perder o medo da folha em branco e criar sem cobrança por perfeição.</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="w-6 h-6 text-[#436CC0] shrink-0 mt-1 animate-slide-x" style={{ animationDelay: '300ms' }} />
-                <span>Para quem fica sem saber o que desenhar e precisa de uma missão para começar.</span>
+                <span>Para quem procura uma atividade criativa e leve para incluir no dia a dia.</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="w-6 h-6 text-[#436CC0] shrink-0 mt-1 animate-slide-x" style={{ animationDelay: '400ms' }} />
-                <span>Para quem quer acompanhar sua evolução e sentir a satisfação de completar os 30 dias.</span>
+                <span>Para quem conduz aulas, oficinas ou encontros criativos e busca uma proposta diferente para alunos ou grupos.</span>
               </li>
             </ul>
           </div>
@@ -343,20 +427,24 @@ export default function App() {
               O que você vai receber?
             </h2>
             <p className="text-lg md:text-xl mb-5">
-              Aqui, o objetivo não é fazer desenhos perfeitos. A proposta é assumir um pequeno compromisso diário, cumprir cada missão e registrar seu progresso até completar o desafio.
+              Um material 100% autoral e pronto para imprimir, criado para ajudar você a desenhar um pouco todos os dias durante 30 dias. Escolha uma proposta, faça o desenho do dia e preencha o seu espaço. Não precisa ser perfeito. Só precisa existir.
             </p>
             <ul className="space-y-4 text-lg md:text-xl mb-4">
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#F4E285] border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '0ms' }}>1</span>
-                <span>Um painel com 30 espaços numerados para registrar um desenho por dia.</span>
+                <span>Duas páginas com 30 espaços numerados, um para cada dia do desafio, para registrar e guardar todos os seus desenhos.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#F0B7B7] border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '200ms' }}>2</span>
-                <span>Uma lista com 30 sugestões criativas para usar sempre que você não souber o que desenhar.</span>
+                <span>Uma lista com 30 ideias criativas, uma para cada dia, para você nunca mais ficar sem saber o que desenhar.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#436CC0] text-white border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '400ms' }}>3</span>
-                <span>Um material prático e visual para desacelerar e exercitar a criatividade por alguns minutos todos os dias.</span>
+                <span>O quadro Combine & Crie, no qual você pode misturar personagens, objetos e lugares para criar até 1.000 combinações diferentes.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#F4E285] border-2 border-[#2c2c2c] rounded-full font-bold text-base shadow-[2px_2px_0px_0px_#2c2c2c] animate-float" style={{ animationDelay: '600ms' }}>4</span>
+                <span>30 tirinhas recortáveis para imprimir, sortear e deixar o tema do desenho do dia nas mãos do acaso, com um arquivo separado para impressão do verso.</span>
               </li>
             </ul>
           </div>
@@ -367,7 +455,7 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#2c2c2c]">Conheça o seu novo desafio!</h2>
           <div className="relative bg-white border-4 border-[#2c2c2c] rounded-3xl p-3 shadow-[8px_8px_0px_0px_#F0B7B7] rotate-1 max-w-sm mx-auto">
             <img 
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhd0OcjWHbpcgEScV8vZ0dOfFQZklUuToa9RS2WqRsd8aFT3Ku4Kfz9Y5_XLL_XGz4AGA-Y0xbl4phh3qUemXUDJ4BeRiwEaFtSvA9DGfR3ng9HjhHxXz3idlATwcWbxR43giHi3XbBD4zyf_-ZEFiOd59AUsi7Ij_qYBZn8e8eUXdNB5-eklyHRL2csZk/w480-h640/desafio%2030%20dias%20tabela.png" 
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrcYfo3LEu38vYnpZmbOH4V3X1MQ1Ex14ROqDczrj_ZbVuDRxe0xsOXIoY_Ra78QQIPizdKSiQJ8INcxRRpjeQlF2S-PJkDjtiT9jxFRZnyXclbLbHZxSrNhrAJLF4KYf2xaP27NGOxl12RPJJNN1Ag0zWt-jmigkTtDBXG8TX1N66i4-IpQxqWdqR9eI/w480-h640/V%C3%ADdeocapcut.gif" 
               alt="Desafio por dentro" 
               className="w-full aspect-[3/4] object-cover border-4 border-dashed border-[#2c2c2c] rounded-2xl" 
             />
@@ -379,7 +467,7 @@ export default function App() {
         </section>
 
         <div className="flex justify-center mb-14 px-2">
-          <a href="https://pay.hotmart.com/I106894004O?off=ymm60njl&checkoutMode=10" target="_blank" rel="noopener noreferrer" className="w-full max-w-sm bg-[#436CC0] hover:bg-[#325296] text-white text-xl md:text-2xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2 animate-shine">
+          <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="w-full max-w-sm bg-[#436CC0] hover:bg-[#325296] text-white text-xl md:text-2xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2 animate-shine">
             <ShoppingCart className="w-6 h-6 shrink-0 animate-wiggle" />
             <span className="text-center leading-tight whitespace-nowrap">QUERO COMPRAR!</span>
           </a>
@@ -397,6 +485,45 @@ export default function App() {
                </p>
              </div>
            </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-[#2c2c2c]">Perguntas Frequentes</h2>
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {faqData.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div key={index} className="bg-white border-4 border-[#2c2c2c] rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_#2c2c2c] transition-all">
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="w-full flex flex-row items-center justify-between p-5 md:p-6 text-left hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl md:text-3xl animate-wiggle inline-block">{faq.icon}</span>
+                      <h3 className="text-xl md:text-2xl font-bold text-[#2c2c2c] pr-4">{faq.question}</h3>
+                    </div>
+                    <ChevronDown className={`w-8 h-8 shrink-0 text-[#436CC0] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-5 md:p-6 pt-0 text-lg md:text-xl text-gray-700 leading-relaxed border-t-2 border-dashed border-gray-200 mt-2">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         {/* WhatsApp CTA */}
@@ -417,7 +544,7 @@ export default function App() {
 
         <div className="flex justify-center mb-6 mt-8">
           <img 
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhpE_EGskDV5xF-Zatju1s5YXCEwdvpoGvreUeDwvnsm4r6r3iCJLuvdEyMYGOmFw3lSUVTmCyF__bUxErisaS4CFA8c0v3aVpiiFIwd7H4-kZKyAFCXPl6LXKtle431_Dhcvmgb_YPD8OT_tXW2ya0MrYP8ZyV11lFaDWHAcuto0A6pyncxmhzsUsoZA/w640-h208/titulo%20desafio%2030%20dias%20desenhando.png" 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAbEfYmvKtAJeq-HrRDkMtYH4bAdkiGlnIr_hj7LkP76lvJ3W8tbWj4jlwuFx0YAEgsjxpB80-33ki-NWKRiuh-byET4XMSQaRVJhZJZk8JLoHQuxpFURKCRzzb8px7v4qaBz2EJBmZHpiJ12Q6APTMsHW2dlKsWU2By-TbgikL6p0xezsVYM_cSt_c8Y/w400-h225/logo.png" 
             alt="Desafio 30 Dias Desenhando" 
             className="h-16 md:h-20 object-contain drop-shadow-sm opacity-80 hover:opacity-100 transition-opacity"
           />
