@@ -536,7 +536,7 @@ export default function App() {
         <section className="mb-14 text-center">
           <h3 className="text-2xl md:text-3xl font-bold mb-6">Ainda tem dúvidas?</h3>
           <div className="flex justify-center px-2">
-            <a href="https://wa.me/5519988508110?text=Oi%2C%20vim%20do%20site%20do%20manual.%20Tenho%20uma%20d%C3%BAvida." target="_blank" rel="noopener noreferrer" className="w-full max-w-sm bg-[#25D366] hover:bg-[#1DA851] text-white text-xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2">
+            <a href="https://wa.me/5519988508110?text=Oi%2C%20vim%20do%20site.%20Tenho%20uma%20d%C3%BAvida" target="_blank" rel="noopener noreferrer" className="w-full max-w-sm bg-[#25D366] hover:bg-[#1DA851] text-white text-xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2">
                <MessageCircle className="w-6 h-6 shrink-0 animate-wiggle" />
                <span className="text-center leading-tight whitespace-nowrap">Falar no WhatsApp</span>
             </a>
