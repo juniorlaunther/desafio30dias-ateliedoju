@@ -5,11 +5,6 @@ import { AnimatePresence, motion } from 'motion/react';
 const faqData = [
   {
     icon: "✏️",
-    question: "Para quem é indicado o Desafio 30 Dias Desenhando?",
-    answer: "O Desafio é indicado para pessoas de diferentes idades e níveis de experiência que desejam começar a desenhar, retomar a prática, exercitar a criatividade ou criar o hábito de desenhar com mais frequência."
-  },
-  {
-    icon: "🌟",
     question: "Preciso saber desenhar para participar?",
     answer: "Não! O Desafio foi criado para incentivar a prática de forma leve e sem cobranças. Você não precisa ter experiência, dominar técnicas ou fazer desenhos perfeitos. Basta começar e criar do seu jeito."
   },
@@ -316,7 +311,7 @@ export default function App() {
       {/* Header with Logo */}
       <header className="pt-6 pb-4 px-4 flex justify-center items-center">
         <img 
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAbEfYmvKtAJeq-HrRDkMtYH4bAdkiGlnIr_hj7LkP76lvJ3W8tbWj4jlwuFx0YAEgsjxpB80-33ki-NWKRiuh-byET4XMSQaRVJhZJZk8JLoHQuxpFURKCRzzb8px7v4qaBz2EJBmZHpiJ12Q6APTMsHW2dlKsWU2By-TbgikL6p0xezsVYM_cSt_c8Y/w400-h225/logo.png" 
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT0DaThee0JjktClFBu6gyTOwA9kPpZKpyaYaOX3Cy_aZrQgctBcS3kgLHQYGV9XyhfKfKy6o-cfbBWKhXtc8076E50CYd-GumZAzd4BATIdOQjWz2WhETSUD1b1GSWHeFV-lGKH-05OpDn51ttmAURZsE1KhIuNEaSl7Ow_mPUvpEzC3yazIPomUOsFw/w640-h246/logo%20completa%20desafio.png" 
           alt="Desafio 30 Dias Desenhando" 
           className="max-h-28 md:max-h-40 object-contain drop-shadow-md animate-scale-soft"
         />
@@ -370,11 +365,15 @@ export default function App() {
           </div>
           
           <h1 className="text-2xl md:text-4xl font-bold mb-3 leading-tight text-center md:text-left">
-            30 Dias para Criar Constância e Não Abandonar o Desenho
+            30 Dias para Destravar a Criatividade e Criar o Hábito de Desenhar
           </h1>
           
-          <p className="text-lg md:text-xl mb-6 opacity-90 text-center md:text-left">
-            Um desafio simples para você desenhar um pouco todos os dias, acompanhar seu progresso e chegar ao final com 30 desenhos concluídos.
+          <p className="text-lg md:text-xl mb-2 opacity-90 text-center md:text-left">
+            Um desafio leve e imprimível, com ideias, combinações e sorteios para ajudar você a fazer um desenho por dia e chegar ao final com 30 criações feitas por você.
+          </p>
+          
+          <p className="text-lg md:text-xl font-bold mb-6 text-center md:text-left">
+            Não precisa ser perfeito. Só precisa existir. 💜
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-5 bg-white/50 p-4 rounded-2xl border-2 border-[#2c2c2c] border-dashed">
@@ -455,7 +454,7 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#2c2c2c]">Conheça o seu novo desafio!</h2>
           <div className="relative bg-white border-4 border-[#2c2c2c] rounded-3xl p-3 shadow-[8px_8px_0px_0px_#F0B7B7] rotate-1 max-w-sm mx-auto">
             <img 
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrcYfo3LEu38vYnpZmbOH4V3X1MQ1Ex14ROqDczrj_ZbVuDRxe0xsOXIoY_Ra78QQIPizdKSiQJ8INcxRRpjeQlF2S-PJkDjtiT9jxFRZnyXclbLbHZxSrNhrAJLF4KYf2xaP27NGOxl12RPJJNN1Ag0zWt-jmigkTtDBXG8TX1N66i4-IpQxqWdqR9eI/w480-h640/V%C3%ADdeocapcut.gif" 
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp4a_ev2poA9joPlT9WEokP8Pm6F_yUwr6INXmyCK8m-LW73QjAsdKKbsRTGakgTae5WX8HYTxAGBFm7y-997ziagHrq9z27sy0ToxEbr9LOr3-ilJ5V4CT1_s0Jlg41M0Qjlrvk8kwKz6UEGbfM_Q9FaKeC-kR6rVxGe1m8NLk2K8r8ksg8sdnKIMGI8/w300-h400/V%C3%ADdeocapcut%20comprimido.gif" 
               alt="Desafio por dentro" 
               className="w-full aspect-[3/4] object-cover border-4 border-dashed border-[#2c2c2c] rounded-2xl" 
             />
@@ -481,7 +480,7 @@ export default function App() {
              <div className="relative z-10 text-center md:text-left">
                <h3 className="text-2xl md:text-3xl font-bold mb-3">Garantia de 7 Dias</h3>
                <p className="text-lg md:text-xl opacity-90 leading-relaxed">
-                 Comece o desafio com tranquilidade. Caso não fique satisfeito, basta solicitar o reembolso e receber 100% do valor investido.
+                 Comece o desafio com tranquilidade. Caso não fique satisfeito, basta solicitar o reembolso dentro desse período.
                </p>
              </div>
            </div>
@@ -526,6 +525,13 @@ export default function App() {
           </div>
         </section>
 
+        <div className="flex justify-center mb-14 px-2">
+          <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="w-full max-w-sm bg-[#436CC0] hover:bg-[#325296] text-white text-xl md:text-2xl font-bold py-3 md:py-4 px-4 md:px-8 rounded-2xl border-4 border-[#2c2c2c] shadow-[4px_4px_0px_0px_#2c2c2c] hover:translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_#2c2c2c] transition-all flex items-center justify-center gap-2 animate-shine">
+            <ShoppingCart className="w-6 h-6 shrink-0 animate-wiggle" />
+            <span className="text-center leading-tight whitespace-nowrap">ACEITO O DESAFIO!</span>
+          </a>
+        </div>
+
         {/* WhatsApp CTA */}
         <section className="mb-14 text-center">
           <h3 className="text-2xl md:text-3xl font-bold mb-6">Ainda tem dúvidas?</h3>
@@ -544,7 +550,7 @@ export default function App() {
 
         <div className="flex justify-center mb-6 mt-8">
           <img 
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAbEfYmvKtAJeq-HrRDkMtYH4bAdkiGlnIr_hj7LkP76lvJ3W8tbWj4jlwuFx0YAEgsjxpB80-33ki-NWKRiuh-byET4XMSQaRVJhZJZk8JLoHQuxpFURKCRzzb8px7v4qaBz2EJBmZHpiJ12Q6APTMsHW2dlKsWU2By-TbgikL6p0xezsVYM_cSt_c8Y/w400-h225/logo.png" 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT0DaThee0JjktClFBu6gyTOwA9kPpZKpyaYaOX3Cy_aZrQgctBcS3kgLHQYGV9XyhfKfKy6o-cfbBWKhXtc8076E50CYd-GumZAzd4BATIdOQjWz2WhETSUD1b1GSWHeFV-lGKH-05OpDn51ttmAURZsE1KhIuNEaSl7Ow_mPUvpEzC3yazIPomUOsFw/w640-h246/logo%20completa%20desafio.png" 
             alt="Desafio 30 Dias Desenhando" 
             className="h-16 md:h-20 object-contain drop-shadow-sm opacity-80 hover:opacity-100 transition-opacity"
           />
