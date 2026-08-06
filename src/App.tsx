@@ -557,7 +557,7 @@ export default function App() {
         </div>
 
         <p className="mt-4">© {new Date().getFullYear()} Desafio 30 Dias Desenhando.</p>
-        <p>Todos os direitos reservados.</p>
+        <p>Todos os direitos reservados - Ateliê do Ju</p>
       </footer>
 
       {/* Fake Purchase Notification */}
